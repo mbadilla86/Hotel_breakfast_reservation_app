@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reservation:</strong>
+  <%= @breakfast.reservation_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @breakfast.date %>
+</p>
+
+<%= link_to 'Edit', edit_breakfast_path(@breakfast) %> |
+<%= link_to 'Back', breakfasts_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Breakfasts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reservation</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @breakfasts.each do |breakfast| %>
+      <tr>
+        <td><%= breakfast.reservation_id %></td>
+        <td><%= breakfast.date %></td>
+        <td><%= link_to 'Show', breakfast %></td>
+        <td><%= link_to 'Edit', edit_breakfast_path(breakfast) %></td>
+        <td><%= link_to 'Destroy', breakfast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Breakfast', new_breakfast_path %>
