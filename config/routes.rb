@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :rooms
   resources :breakfasts
   resources :reservations
-  #get 'home/index'
+  get 'home/index'
   
   devise_for :admins
   devise_for :users, controllers: {

@@ -12,7 +12,12 @@
 
   <body>
       <p class="notice"><%= notice %></p>
-     <p class="alert"><%= alert %></p>
+      <p class="alert"><%= alert %></p>
+
+    <ul class="display-inline">
+      <%= render 'shared/navbar' %>
+    </ul>
+
     <%= yield %>
   </body>
 </html>
