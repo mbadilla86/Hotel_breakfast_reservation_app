@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   
   #get 'home/index'
   authenticate :user do
-    resources :user_reservations
     resources :user_breakfasts
 
   end
