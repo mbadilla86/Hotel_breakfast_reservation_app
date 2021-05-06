@@ -1,5 +1,6 @@
 class HotelsController < ApplicationController
   before_action :set_hotel, only: %i[ show edit update destroy ]
+  before_action :authenticate_admin!, unless: :devise_controller?
 
   # GET /hotels or /hotels.json
   def index

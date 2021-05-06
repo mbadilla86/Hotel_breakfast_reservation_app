@@ -4,5 +4,5 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :hotel       
+  has_and_belongs_to_many :hotels
 end

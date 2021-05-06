@@ -1,5 +1,4 @@
 class Hotel < ApplicationRecord
   has_many :rooms
-  has_many :admins
-
+  has_and_belongs_to_many :admins
 end

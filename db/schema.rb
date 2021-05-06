@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_185304) do
+ActiveRecord::Schema.define(version: 2021_05_06_171438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,17 @@ ActiveRecord::Schema.define(version: 2021_05_05_185304) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
-    t.bigint "hotel_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["hotel_id"], name: "index_admins_on_hotel_id"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "admins_hotels", id: false, force: :cascade do |t|
+    t.bigint "admin_id", null: false
+    t.bigint "hotel_id", null: false
+    t.index ["admin_id", "hotel_id"], name: "index_admins_hotels_on_admin_id_and_hotel_id"
+    t.index ["hotel_id", "admin_id"], name: "index_admins_hotels_on_hotel_id_and_admin_id"
   end
 
   create_table "breakfasts", force: :cascade do |t|
@@ -96,7 +101,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_185304) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "admins", "hotels"
   add_foreign_key "breakfasts", "reservations"
   add_foreign_key "reservations", "rooms"
   add_foreign_key "rooms", "hotels"

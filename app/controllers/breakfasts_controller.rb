@@ -1,5 +1,6 @@
 class BreakfastsController < ApplicationController
   before_action :set_breakfast, only: %i[ show edit update destroy ]
+  before_action :authenticate_admin!, unless: :devise_controller?
 
   # GET /breakfasts or /breakfasts.json
   def index
