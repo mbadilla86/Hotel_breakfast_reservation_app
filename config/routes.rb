@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
 
     unauthenticated :admin do
-      root to: "admins/sessions#new", as: :unautenticated_admin_root
+      root to: "admins/sessions#new", as: :unautenticated_root
     end
   end
 

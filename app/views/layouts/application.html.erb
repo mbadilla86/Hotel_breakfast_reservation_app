@@ -12,11 +12,40 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="p-3 mb-2 text-dark">
-
+  <body class="">  
+<nav class="navbar navbar-expand-lg  navbar-light text-dark border border-3 " style="background-color: #20c997;">
+  <div class="container-sm my-2">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse  " id="navbarNavDropdown">
+      <ul class="navbar-nav  ">
+              <% if current_user %>
+        <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"><%= link_to('Cerrar sesión Usuario', destroy_user_session_path)%></button>
+              <% else %>
+        <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"><%= link_to('Iniciar sesión', new_user_session_path)%></button>
+        <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"><%= link_to('Registrarse', new_user_registration_path)%></button>
+              <% end %>
+        <li class="nav-item dropdown  ">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Acceso Admin
+          </a>
+          <ul class="dropdown-menu  border border-3" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#"><%= link_to('Cerrar sesión admin', destroy_admin_session_path)%></a></li>
+            <li><a class="dropdown-item" href="#"><%= link_to('Iniciar sesión', new_admin_session_path) %></a></li>
+            <li role="separator" class="divider"></li>
+            <li><a class="dropdown-item" href="#"><%= link_to('Registrarse', new_admin_registration_path) %></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-   <%= render 'shared/navbar'%>
+
     <%= yield %>
+
+    
   </body>
 </html>
