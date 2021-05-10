@@ -33,12 +33,12 @@ users = users_names.map do |name|
   reservation.users << u
 end
 
-reservation.breakfasts.map do |breakfast|
-  time = (0..7).to_a.sample
-  place = (0..3).to_a.sample
+# reservation.breakfasts.map do |breakfast|
+#   time = (0..7).to_a.sample
+#   place = (0..3).to_a.sample
 
-  reservation.users.map do |user|
-    br = breakfast.user_breakfasts.create(user: user, time: time, place: place)
-    puts "#{br.user.first_name} desayunará el día #{breakfast.date} a las #{br.time} en #{br.place}"
-  end
-end
+#   reservation.users.map do |user|
+#     br = breakfast.user_breakfasts.create(user: user, time: time, place: place)
+#     puts "#{br.user.first_name} desayunará el día #{breakfast.date} a las #{br.time} en #{br.place}"
+#   end
+# end

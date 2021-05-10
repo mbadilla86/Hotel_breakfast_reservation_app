@@ -13,6 +13,8 @@ class UserBreakfastsController < ApplicationController
   # GET /user_breakfasts/new
   def new
     @user_breakfast = UserBreakfast.new
+    @times = UserBreakfast.times.map {|k,v| [k,v] }
+    @places = UserBreakfast.places.map {|k,v| [k,v] }
   end
 
   # GET /user_breakfasts/1/edit

@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :place %>
-    <%= form.number_field :place %>
+    <%= form.select :place, @places %>
   </div>
 
   <div class="field">
     <%= form.label :time %>
-    <%= form.number_field :time %>
+    <%= form.select :time, @times %>
   </div>
 
   <div class="actions">
