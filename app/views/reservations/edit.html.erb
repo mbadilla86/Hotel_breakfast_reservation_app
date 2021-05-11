@@ -2,5 +2,5 @@
 
 <%= render 'form', reservation: @reservation %>
 
-<%= link_to 'Show', @reservation %> |
-<%= link_to 'Back', reservations_path %>
+<%= link_to 'Show', [@hotel, @room, @reservation] %> |
+<%= link_to 'Back', hotel_room_reservations_path(@hotel, @room) %>
