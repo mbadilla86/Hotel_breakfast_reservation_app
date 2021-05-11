@@ -1,14 +1,17 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[ show edit update destroy ]
+  before_action :set_hotel
   before_action :authenticate_admin!, unless: :devise_controller?
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = @hotel.rooms
   end
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    @rooms = @hotel.rooms
+    @reservations = @room.reservations
   end
 
   # GET /rooms/new
@@ -22,11 +25,11 @@ class RoomsController < ApplicationController
 
   # POST /rooms or /rooms.json
   def create
-    @room = Room.new(room_params)
+    @room = Room.new(room_params.merge(hotel: @hotel))
 
     respond_to do |format|
       if @room.save
-        format.html { redirect_to @room, notice: "Room was successfully created." }
+        format.html { redirect_to [@hotel,@room], notice: "Room was successfully created." }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -61,6 +64,10 @@ class RoomsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
+    end
+
+    def set_hotel
+      @hotel = Hotel.find(params[:hotel_id])
     end
 
     # Only allow a list of trusted parameters through.

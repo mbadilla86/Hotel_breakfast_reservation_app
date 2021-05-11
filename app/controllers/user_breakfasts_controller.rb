@@ -3,7 +3,7 @@ class UserBreakfastsController < ApplicationController
 
   # GET /user_breakfasts or /user_breakfasts.json
   def index
-    @user_breakfasts = UserBreakfast.all
+    @user_breakfasts = UserBreakfast.includes([:user, :breakfast]).all
   end
 
   # GET /user_breakfasts/1 or /user_breakfasts/1.json

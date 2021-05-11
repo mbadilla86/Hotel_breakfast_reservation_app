@@ -15,5 +15,5 @@
   <%= @reservation.end_date %>
 </p>
 
-<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-<%= link_to 'Back', reservations_path %>
+<%= link_to 'Edit', edit_hotel_room_reservation_path(@hotel, @room, @reservation) %> |
+<%= link_to 'Back', hotel_room_reservations_path(@hotel, @room) %>

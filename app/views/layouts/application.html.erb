@@ -18,23 +18,31 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse  " id="navbarNavDropdown">
-      <ul class="navbar-nav  ">
-        <% if current_user %>
-        <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"><%= link_to('Cerrar sesión Usuario', destroy_user_session_path, method: :delete)%></button>
-        <% else %>
-        <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"><%= link_to('Iniciar sesión', new_user_session_path)%></button>
-        <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"><%= link_to('Registrarse', new_user_registration_path)%></button>
-              <% end %>
+        <li class="nav-item dropdown  ">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clientes</a>
+          <ul class="dropdown-menu  border border-3" aria-labelledby="navbarDropdownMenuLink">
+           <% if current_user %>
+            <li><a class="dropdown-item" href="#"><%= link_to('Cerrar sesión admin', destroy_user_session_path, method: :delete)%></a></li>
+             <% else %>
+            <li><a class="dropdown-item" href="#"><%= link_to('Iniciar sesión', new_user_session_path) %></a></li>
+            <li role="separator" class="divider"></li>
+            <li><a class="dropdown-item" href="#"><%= link_to('Registrarse', new_user_registration_path) %></a></li>
+            <% end %>
+          </ul>
+        </li>
         <li class="nav-item dropdown  ">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Acceso Admin
           </a>
           <ul class="dropdown-menu  border border-3" aria-labelledby="navbarDropdownMenuLink">
+          <% if current_admin %>
             <li><a class="dropdown-item" href="#"><%= link_to('Cerrar sesión admin', destroy_admin_session_path, method: :delete)%></a></li>
+             <% else %>
             <li><a class="dropdown-item" href="#"><%= link_to('Iniciar sesión', new_admin_session_path) %></a></li>
             <li role="separator" class="divider"></li>
             <li><a class="dropdown-item" href="#"><%= link_to('Registrarse', new_admin_registration_path) %></a></li>
+            <% end %>
           </ul>
         </li>
       </ul>

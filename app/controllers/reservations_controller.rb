@@ -1,10 +1,11 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy ]
   before_action :authenticate_admin!, unless: :devise_controller?
+  before_action :set_hotel, :set_room
 
   # GET /reservations or /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = @room.reservations
   end
 
   # GET /reservations/1 or /reservations/1.json
@@ -13,7 +14,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
-    @reservation = Reservation.new
+    @reservation = @room.reservations.new
   end
 
   # GET /reservations/1/edit
@@ -22,11 +23,11 @@ class ReservationsController < ApplicationController
 
   # POST /reservations or /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = @room.reservations.new(reservation_params)
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to @reservation, notice: "Reservation was successfully created." }
+        format.html { redirect_to [@hotel, @room, @reservation], notice: "Reservation was successfully created." }
         format.json { render :show, status: :created, location: @reservation }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class ReservationsController < ApplicationController
   def update
     respond_to do |format|
       if @reservation.update(reservation_params)
-        format.html { redirect_to @reservation, notice: "Reservation was successfully updated." }
+        format.html { redirect_to [@hotel, @room, @reservation], notice: "Reservation was successfully updated." }
         format.json { render :show, status: :ok, location: @reservation }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +53,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to reservations_url, notice: "Reservation was successfully destroyed." }
+      format.html { redirect_to [@hotel, @room], notice: "Reservation was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -61,6 +62,14 @@ class ReservationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
+    end
+
+    def set_room
+      @room = Room.find(params[:room_id])
+    end
+
+    def set_hotel
+      @hotel = Hotel.find(params[:hotel_id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :user_breakfasts
-  has_many :breakfasts, through: :user_breakfasts
+  has_many :breakfasts, through: :user_breakfasts​
   has_and_belongs_to_many :reservations
   
   # , before_add: :schedule_breakfasts

@@ -9,6 +9,7 @@ class HotelsController < ApplicationController
 
   # GET /hotels/1 or /hotels/1.json
   def show
+    @rooms = @hotel.rooms
   end
 
   # GET /hotels/new

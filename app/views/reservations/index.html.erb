@@ -18,9 +18,9 @@
         <td><%= reservation.room_id %></td>
         <td><%= reservation.start_date %></td>
         <td><%= reservation.end_date %></td>
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', hotel_room_reservations_path(@hotel, @room, reservation) %></td>
+        <td><%= link_to 'Edit', edit_hotel_room_reservation_path(@hotel, @room, reservation) %></td>
+        <td><%= link_to 'Destroy', [@hotel, @room, reservation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Reservation', new_reservation_path %>
+<%= link_to 'New Reservation', new_hotel_room_reservation_path(@hotel, @room) %>
