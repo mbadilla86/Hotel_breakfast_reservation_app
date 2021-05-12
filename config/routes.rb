@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   devise_scope :admin do
     authenticated :admin do
-      root to: "hotels#index", as: :authenticated_admin_root
+      root to: "hotels#dashboard", as: :authenticated_admin_root
     end
 
     unauthenticated :admin do
