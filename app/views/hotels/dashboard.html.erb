@@ -1,7 +1,28 @@
-
 <div class="container">
   <h1>Dashboard</h1>
-  <hr>
+                <hr>
+  <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+      <div class="container my-5 text-center bg-primary">
+        <h2 class="text-light">Última visita!</h2>
+        <div class="mt-5" id="contenido">           
+        </div>
+      </div>
+      </div>
+      <div class="col-sm"></div>
+    </div>
+
+    <script>
+        var contenido = document.querySelector('#contenido')
+            fetch('https://randomuser.me/api/')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.results['0'])
+                contenido.innerHTML = `
+                <img src="${data.results['0'].picture.large}" width="70px" class="img-fluid rounded-circle">`
+            })
+    </script>
   <h2 class="my-2">Breakfasts</h2>
     <div class="row my-5">
       <div class="col-lg-12 my-2"> 
@@ -16,10 +37,10 @@
         <div class="card"> <%= column_chart @places %></div>
       </div>
     </div>
-</div>
-<br>
-<h2 class="my-2">Breakfasts </h2>
-<div class="row my-5">
+  </div>
+  <br>
+  <h2 class="my-2">Breakfasts </h2>
+  <div class="row my-5">
       <div class="col-lg-6 my-2"> 
         <div class="card"> <%= pie_chart UserBreakfast.group(:user_breakfasts).count %></div>
       </div>
