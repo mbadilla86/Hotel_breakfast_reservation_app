@@ -14,3 +14,8 @@ ActiveStorage.start()
 
 import "bootstrap"
 import "../stylesheets/application"
+
+import "chartkick/chart.js"
+import Highcharts from 'highcharts'
+window.Highcharts = Highcharts
+

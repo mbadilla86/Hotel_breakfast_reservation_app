@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   authenticate :admin do
     resources :hotels do
       resources :rooms do
-        resources :reservations do
-          resources :user_breakfasts
-        end
+        resources :reservations 
       end
+      resources :user_breakfasts
+
+      get 'dashboard', to: 'hotels#dashboard', as: :dashboard
     end
     resources :breakfasts
   end
