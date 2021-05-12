@@ -1,27 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Hi <%= current_user.full_name %></h1>
-
-<% @user_breakfasts.each do |breakfast| %>
-  <div class="form_breakfast">
-  <%= form_with(model: breakfast, local: false) do |form| %>
-    <%= form.hidden_field :user_id, id: false %>
-    <%= form.hidden_field :breakfast_id, id: false %>
-
-    <p data-id="<%= breakfast.id %>">
-      <%= breakfast.breakfast.date.strftime("%B-%d-%Y") %>
-      <%= form.select :place, @places %>
-      <%= form.select :time, @times %>
-      <%= form.submit %>
-    </p>
-  <% end %>
-  </div>
-<% end %>
 <div class="row">
       <div class="col-sm"></div>
       <div class="col-sm">
       <div class="container my-5 text-center bg-primary">
-        <h2 class="text-light">Bienvenid@s!</h2>
+        <h2 class="text-light">Bienvenid@s al Hotel California!</h2>
         <div class="mt-5" id="contenido">           
         </div>
       </div>
@@ -39,3 +20,22 @@
                 <img src="${data.results['0'].picture.large}" width="70px" class="img-fluid rounded-circle">`
             })
     </script>
+<p id="notice"><%= notice %></p>
+
+<h1>Hello <%= current_user.full_name %></h1>
+
+<% @user_breakfasts.each do |breakfast| %>
+  <div class="form_breakfast">
+  <%= form_with(model: breakfast, local: false) do |form| %>
+    <%= form.hidden_field :user_id, id: false %>
+    <%= form.hidden_field :breakfast_id, id: false %>
+
+    <p data-id="<%= breakfast.id %>">
+      <%= breakfast.breakfast.date.strftime("%B-%d-%Y") %>
+      <%= form.select :place, @places %>
+      <%= form.select :time, @times %>
+      <%= form.submit %>
+    </p>
+  <% end %>
+  </div class="container-sm my-2">
+<% end %>
