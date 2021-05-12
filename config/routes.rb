@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   authenticate :admin do
     resources :hotels do
       resources :rooms do
-        resources :reservations
+        resources :reservations do
+          resources :user_breakfasts
+        end
       end
     end
     resources :breakfasts

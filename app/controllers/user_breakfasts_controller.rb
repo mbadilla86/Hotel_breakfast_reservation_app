@@ -3,7 +3,10 @@ class UserBreakfastsController < ApplicationController
 
   # GET /user_breakfasts or /user_breakfasts.json
   def index
-    @user_breakfasts = UserBreakfast.includes([:user, :breakfast]).all
+    #@user_breakfasts = UserBreakfast.includes([:user, :breakfast]).all
+    @user_breakfasts = UserBreakfast.includes([:breakfast]).where(user: current_user).sort
+    @times = UserBreakfast.times.map {|k,v| [k,k] }
+    @places = UserBreakfast.places.map {|k,v| [k,k] }
   end
 
   # GET /user_breakfasts/1 or /user_breakfasts/1.json
@@ -19,6 +22,8 @@ class UserBreakfastsController < ApplicationController
 
   # GET /user_breakfasts/1/edit
   def edit
+    @times = UserBreakfast.times.map {|k,v| [k,v] }
+    @places = UserBreakfast.places.map {|k,v| [k,v] }
   end
 
   # POST /user_breakfasts or /user_breakfasts.json
@@ -42,6 +47,7 @@ class UserBreakfastsController < ApplicationController
       if @user_breakfast.update(user_breakfast_params)
         format.html { redirect_to @user_breakfast, notice: "User breakfast was successfully updated." }
         format.json { render :show, status: :ok, location: @user_breakfast }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user_breakfast.errors, status: :unprocessable_entity }

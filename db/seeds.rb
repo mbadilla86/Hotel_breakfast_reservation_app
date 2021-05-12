@@ -18,20 +18,25 @@ admin.hotels << hotel
   puts "Se ha creado el room: #{room.number}"
 end
 
-room = Room.first
-reservation = room.reservations.create(start_date: Date.parse('2021-05-04'), end_date: Date.parse('2021-05-11') )
-puts "Se ha creado la reserva de la pieza: #{reservation.room.number} que inicia el: #{reservation.start_date}"
-
-7.times do |nu|
-  r = reservation.breakfasts.create(date: Date.parse("2021-05-#{nu + 5}"))
-  puts "Se ha creado el desayuno del día: #{r.date}"
-end
-
 users_names = ['Juan', 'Ana', 'Julia', 'Pedro']
 users = users_names.map do |name|
-  u = User.new(email: "#{name.downcase}@example.com", first_name: name, last_name: 'Pérez', password: 123123)
-  reservation.users << u
+  User.new(email: "#{name.downcase}@example.com", first_name: name, last_name: 'Pérez', password: 123123)
 end
+
+room = Room.first
+reservation = room.reservations.new(start_date: Date.parse('2021-05-04'), end_date: Date.parse('2021-05-11') )
+puts "Se ha creado la reserva de la pieza: #{reservation.room.number} que inicia el: #{reservation.start_date}"
+
+users.map do |user|
+  reservation.users << user
+end
+
+reservation.save
+
+# 7.times do |nu|
+#   r = reservation.breakfasts.create(date: Date.parse("2021-05-#{nu + 5}"))
+#   puts "Se ha creado el desayuno del día: #{r.date}"
+# end
 
 # reservation.breakfasts.map do |breakfast|
 #   time = (0..7).to_a.sample

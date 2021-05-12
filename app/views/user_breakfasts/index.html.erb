@@ -1,33 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>User Breakfasts</h1>
+<h1>Hi <%= current_user.full_name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>user_id</th>
-      <th>breakfast_id</th>
-      <th>Place</th>
-      <th>Time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @user_breakfasts.each do |breakfast| %>
+  <div class="form_breakfast">
+  <%= form_with(model: breakfast, local: false) do |form| %>
+    <%= form.hidden_field :user_id, id: false %>
+    <%= form.hidden_field :breakfast_id, id: false %>
 
-  <tbody>
-    <% @user_breakfasts.each do |user_breakfast| %>
-      <tr>
-        <td><%= user_breakfast.user.first_name %></td>
-        <td><%= user_breakfast.breakfast.reservation_id %></td>
-        <td><%= user_breakfast.place %></td>
-        <td><%= user_breakfast.time %></td>
-        <td><%= link_to 'Show', user_breakfast %></td>
-        <td><%= link_to 'Edit', edit_user_breakfast_path(user_breakfast) %></td>
-        <td><%= link_to 'Destroy', user_breakfast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User Breakfast', new_user_breakfast_path %>
+    <p data-id="<%= breakfast.id %>">
+      <%= breakfast.breakfast.date.strftime("%B-%d-%Y") %>
+      <%= form.select :place, @places %>
+      <%= form.select :time, @times %>
+      <%= form.submit %>
+    </p>
+  <% end %>
+  </div>
+<% end %>
